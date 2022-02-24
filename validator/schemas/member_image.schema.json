@@ -1,0 +1,77 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+        "distgit_key": {
+            "type": "string",
+            "minLength": 1
+        },
+        "why": {
+            "type": "string",
+            "minLength": 1
+        },
+        "metadata": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": true
+                },
+                "content!": {
+                    "$ref": "#/properties/metadata/properties/content"
+                },
+                "content?": {
+                    "$ref": "#/properties/metadata/properties/content"
+                },
+                "content-": {},
+                "container_yaml": {
+                    "type": "object"
+                },
+                "container_yaml!": {
+                    "$ref": "#/properties/metadata/properties/container_yaml"
+                },
+                "container_yaml?": {
+                    "$ref": "#/properties/metadata/properties/container_yaml"
+                },
+                "container_yaml-": {},
+                "dependencies": {
+                    "$ref": "assembly_dependencies.schema.json"
+                },
+                "dependencies!": {
+                    "$ref": "#/properties/metadata/properties/dependencies"
+                },
+                "dependencies?": {
+                    "$ref": "#/properties/metadata/properties/dependencies"
+                },
+                "dependencies-": {},
+                "is": {
+                    "type": "object",
+                    "properties": {
+                        "nvr": {
+                            "type": "string",
+                            "minLength": 1
+                        }
+                    },
+                    "required": [
+                        "nvr"
+                    ],
+                    "additionalProperties": false
+                },
+                "is!": {
+                    "$ref": "#/properties/metadata/properties/is"
+                },
+                "is?": {
+                    "$ref": "#/properties/metadata/properties/is"
+                },
+                "is-": {}
+            },
+            "additionalProperties": false
+        }
+    },
+    "required": [
+        "distgit_key",
+        "why"
+    ],
+    "additionalProperties": false
+}

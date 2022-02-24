@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "arches": {
+      "$ref": "arches.schema.json"
+    },
+    "arches!": {
+      "$ref": "#/properties/arches"
+    },
+    "arches?": {
+      "$ref": "#/properties/arches"
+    },
+    "arches-": {},
+    "repos": {
+      "$ref": "repos.schema.json"
+    },
+    "repos!": {
+      "$ref": "#/properties/repos"
+    },
+    "repos?": {
+      "$ref": "#/properties/repos"
+    },
+    "repos-": {},
+    "advisories": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "type": "integer"
+        },
+        "rpm": {
+          "type": "integer"
+        },
+        "extras": {
+          "type": "integer"
+        },
+        "metadata": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "advisories!": {
+      "$ref": "#/properties/advisories"
+    },
+    "advisories?": {
+      "$ref": "#/properties/advisories"
+    },
+    "advisories-": {},
+    "dependencies": {
+      "$ref": "assembly_dependencies.schema.json"
+    },
+    "dependencies!": {
+      "$ref": "#/properties/dependencies"
+    },
+    "dependencies?": {
+      "$ref": "#/properties/dependencies"
+    },
+    "release_jira": {
+      "type": "string",
+      "minLength": 1
+    },
+    "upgrades": {
+      "type": "string"
+    },
+    "check_golang_versions": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

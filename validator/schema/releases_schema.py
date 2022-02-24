@@ -1,7 +1,12 @@
-from schema import Schema, Optional, And, Or, Regex, SchemaError
+import json
+from pathlib import Path
+from jsonschema import RefResolver, Draft202012Validator, ValidationError
+from jsonschema.validators import validator_for
 from validator.schema.image_schema import IMAGE_CONTENT_SCHEMA
 from validator.schema.rpm_schema import RPM_CONTENT_SCHEMA
 from validator.schema.streams_schema import STREAMS_SCHEMA
+
+from schema import And, Optional, Or, Regex, Schema, SchemaError
 
 GIT_SSH_URL_REGEX = r'((git@[\w\.]+))([\w\.@\:/\-~]+)(\.git)(/)?'
 UPGRADE_EDGES_REGEX = r'\d+\.\d+\.\d+(?:-[fr]c\.\d+)?(,\d+\.\d+\.\d+(?:-[fr]c\.\d+)?)*'
@@ -24,7 +29,6 @@ ARCHES_DICT = {
     Optional('ppc64le'): str,
     Optional('aarch64'): str,
 }
-
 
 def releases_schema(file):
     return Schema({
@@ -147,9 +151,25 @@ def _demerge(data):
 
     raise TypeError(f"Unexpected value type: {type(data)}: {data}")
 
+import sys
+
+if sys.version_info < (3, 9):
+    # importlib.resources either doesn't exist or lacks the files()
+    # function, so use the PyPI version:
+    import importlib_resources
+else:
+    # importlib.resources has files(), so use that:
+    import importlib.resources as importlib_resources
 
 def validate(file, data):
+    pkg = importlib_resources.files("validator")
+    schemas = {source.name: json.load(open(source)) for source in (pkg / "schemas").iterdir() if source.name.endswith(".json")}
+    schema_store = {schema.get("$id", filename): schema for filename, schema in schemas.items()}
+    schema = schema_store["releases.schema.json"]
+    resolver = RefResolver.from_schema(schema, store=schema_store)
+    #validator = Draft202012Validator(schema, resolver=resolver)
+    validator = validator_for(schema)(schema, resolver=resolver)
     try:
-        releases_schema(file).validate(_demerge(data))
-    except SchemaError as err:
-        return '{}'.format(err)
+        validator.validate(data)
+    except ValidationError as err:
+        return str(err)

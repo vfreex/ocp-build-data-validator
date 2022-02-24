@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Basis of the assembly",
+  "type": "object",
+  "properties": {
+    "brew_event": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "assembly": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reference_releases": {
+      "$ref": "arches_dict.schema.json"
+    },
+    "reference_releases!": {
+      "$ref": "#/properties/reference_releases"
+    },
+    "reference_releases?": {
+      "$ref": "#/properties/reference_releases"
+    },
+    "reference_releases-": {
+    }
+  },
+  "additionalProperties": false
+}
