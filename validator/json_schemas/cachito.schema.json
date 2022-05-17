@@ -21,7 +21,25 @@
     "flags?": {
       "$ref": "#/properties/flags"
     },
-    "flags-": {}
+    "flags-": {},
+    "packages": {
+      "type": "object",
+      "properties": {
+        "gomod": {},
+        "pip": {},
+        "npm": {},
+        "yarn": {},
+        "git-submodule": {}
+      },
+      "additionalProperties": false
+    },
+    "packages!": {
+      "$ref": "#/properties/packages"
+    },
+    "packages?": {
+      "$ref": "#/properties/packages"
+    },
+    "packages-": {}
   },
   "additionalProperties": false
 }

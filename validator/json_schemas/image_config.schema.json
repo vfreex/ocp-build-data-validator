@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "allOf": [
+    {
+      "$ref": "image_config.base.schema.json"
+    },
+    {
+      "$ref": "image_config.requires.schema.json"
+    }
+  ]
+}
