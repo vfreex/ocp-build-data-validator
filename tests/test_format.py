@@ -13,7 +13,7 @@ class TestFormat(unittest.TestCase):
         """
         (parsed, err) = format.validate(invalid_yaml)
         self.assertIsNone(parsed)
-        self.assertEqual(True, "did not find expected key" in err)
+        self.assertIn("expected <block end>, but found", err)
 
     def test_valid_yaml(self):
         valid_yaml = """
