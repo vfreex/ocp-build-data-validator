@@ -1,5 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "member_image.schema.json",
+  "title": "Assembly Member Image",
   "type": "object",
   "properties": {
     "distgit_key": {

@@ -1,5 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "assembly_group_config.schema.json",
+  "title": "Assembly Group Configuration",
   "type": "object",
   "properties": {
     "arches": {
